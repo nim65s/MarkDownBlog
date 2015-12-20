@@ -28,7 +28,8 @@ PARSE_META = {
         'author': lambda x: x,
         'template': lambda x: x,
         }
-FILENAME_PATTERN = ['%s', '%s.md', '%s.markdown', '*-*-*%s', '*-*-*%s.md', '*-*-*%s.markdown']
+FILENAME_PATTERN = ['%s', '%s.md', '%s.markdown',
+        '*-*-*%s', '*-*-*%s.md', '*-*-*%s.markdown']
 
 
 class BlogEntry(Model):

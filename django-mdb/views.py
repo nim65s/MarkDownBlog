@@ -35,7 +35,7 @@ class BlogEntryLongURLRedirectView(BlogEntryMixin, RedirectView):
 
     def get_redirect_url(self, *args, **kwargs):
         billet = get_object_or_404(self.queryset, slug=self.kwargs['slug'])
-        yea, mon, day = (int(self.kwargs[k]) for k in ['year', 'month', 'day'])
+        yea, mon, day = (int(self.kwargs[k]) for k in ['yea', 'mon', 'day'])
         if billet.date != date(yea, mon, day):
             raise Http404
         return billet.get_absolute_url()
