@@ -17,7 +17,7 @@ class Command(BaseCommand):
 
     def handle(self, *args, **options):
         dbmdb = Path(options['dbmdb'])
-        for f in dbmdb.iterdir():
+        for f in dbmdb.glob(*.md):
             with f.open('r') as fo:
                 content = MD.convert(fo.read())
             b, created = BlogEntry.objects.get_or_create(slug=f.stem)
