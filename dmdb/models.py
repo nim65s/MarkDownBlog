@@ -69,7 +69,7 @@ class BlogEntry(Model):
                 if old != new:
                     stdout.write('Changed %s: %s → %s' % (key, old, new))
                     self.__dict__[key] = new
-        for domain in map(str.strip, get(MD, 'sites').split(',')):
+        for domain in map(str.strip, MD.Meta['sites'][0].split(',')):
             site, created = Site.objects.get_or_create(domain=domain)
             if created:
                 stdout.write('New site: %s' % domain)
