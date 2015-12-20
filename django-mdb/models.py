@@ -52,10 +52,10 @@ class BlogEntry(Model):
         return self.title
 
     def get_absolute_url(self):
-        return reverse('django-mdb:entry', kwargs={'slug': self.slug})
+        return reverse('mdb:entry', kwargs={'slug': self.slug})
 
     def get_short_url(self):
-        return reverse('django-mdb:short', kwargs={'pk': hex(self.pk)})
+        return reverse('mdb:short', kwargs={'pk': hex(self.pk)})
 
     def update_from_file(self, path, stdout=sys.stdout):
         with path.open('r') as f:
