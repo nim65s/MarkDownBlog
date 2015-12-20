@@ -22,7 +22,6 @@ class Command(BaseCommand):
 
         for e in Entry.objects.all():
             with (dbmdb / ('%s.md' % e.slug)).open('w') as f:
-                print('id: %i' % e.id, file=f)
                 print('title: %s' % e.title, file=f)
                 print('date: %s' % e.publication_date.date(), file=f)
                 print('is_visible: %i' % e.is_visible, file=f)

@@ -20,10 +20,7 @@ class Command(BaseCommand):
         for f in dbmdb.iterdir():
             with f.open('r') as fo:
                 content = MD.convert(fo.read())
-            if 'id' in MD.Meta:
-                b, created = BlogEntry.objects.get_or_create(slug=f.stem, id=int(MD.Meta['id'][0]))
-            else:
-                b, created = BlogEntry.objects.get_or_create(slug=f.stem)
+            b, created = BlogEntry.objects.get_or_create(slug=f.stem)
             if created:
                 b.content = content
                 for key, converter in PARSE_META.items():
