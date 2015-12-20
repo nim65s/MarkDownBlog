@@ -2,7 +2,7 @@ from django.conf.urls import url
 
 from .views import BlogEntryListView, BlogEntryDetailView, BlogEntryShortURLRedirectView, BlogEntryLongURLRedirectView
 
-app_name = 'mdb'
+app_name = 'django-mdb'
 urlpatterns = [
         url(r'^(?P<yea>\d{4})/(?P<mon>\d{2})/(?P<day>\d{2})/(?P<slug>[^/]+)$',
             BlogEntryLongURLRedirectView.as_view()),
