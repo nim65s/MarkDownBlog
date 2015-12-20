@@ -11,10 +11,10 @@ setup(
         name='MarkDownBlog',
         version='0.1.0',
         packages=['django-mdb'],
-        requires=[
+        install_requires=[
             'Django',
             'django-bootstrap3',
-            ]
+            ],
         include_package_data=True,
         license='GPL License',
         description='A simple Django app to blog with markdown.',
