@@ -2,7 +2,7 @@ from pathlib import Path
 
 from django.core.management.base import BaseCommand
 
-from mdb.models import BlogEntry, MD, DBMDB, PARSE_META, FILENAME_PATTERN
+from dmdb.models import BlogEntry, MD, DBMDB, PARSE_META, FILENAME_PATTERN
 
 
 class Command(BaseCommand):

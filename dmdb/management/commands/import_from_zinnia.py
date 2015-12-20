@@ -4,7 +4,7 @@ from django.core.management.base import BaseCommand
 
 from zinnia.models import Entry
 
-from mdb.models import DBMDB
+from dmdb.models import DBMDB
 
 
 class Command(BaseCommand):

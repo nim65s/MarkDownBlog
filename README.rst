@@ -2,14 +2,14 @@
 
 ## Quick start with Django
 
-1. Add "django-mdb" to your `INSTALLED_APPS`
+1. Add "dmdb" to your `INSTALLED_APPS`
 
 2. Include the MarkDownBlog URLconf in your `urls.py`:
-    url(r'^blog/', include('django-mdb.urls')),
+    url(r'^blog/', include('dmdb.urls')),
 
     or even
 
-    url(r'', include('django-mdb.urls')),
+    url(r'', include('dmdb.urls')),
 
 3. Run `python manage.py migrate` to create the models
 4. create the `dbmdb` folder, where each file is a post (whose slug is the filename):

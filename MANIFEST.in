@@ -1,6 +1,6 @@
 include LICENSE
 include README.rst
-recursive-include django-mdb/management *
-recursive-include django-mdb/migrations *
-recursive-include django-mdb/templates *
+recursive-include dmdb/management *
+recursive-include dmdb/migrations *
+recursive-include dmdb/templates *
 recursive-include docs *
