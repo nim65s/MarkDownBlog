@@ -1,5 +1,5 @@
 include LICENSE
-include README.rst
+include README.md
 recursive-include dmdb/management *
 recursive-include dmdb/migrations *
 recursive-include dmdb/templates *
