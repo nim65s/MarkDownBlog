@@ -11,7 +11,7 @@ os.chdir(os.path.normpath(os.path.join(os.path.abspath(__file__), os.pardir)))
 setup(
         name='MarkDownBlog',
         version='0.2.0',
-        packages=['dmdb', 'smdb'],
+        packages=['dmdb', 'smdb', 'mdb_settings'],
         install_requires=[
             'markdown',
             ],

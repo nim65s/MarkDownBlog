@@ -1,5 +1,4 @@
-from datetime import datetime, date
-from difflib import Differ
+from datetime import date
 from pathlib import Path
 import sys
 
@@ -10,26 +9,9 @@ from django.contrib.sites.models import Site
 from django.contrib.sites.shortcuts import get_current_site
 from django.core.urlresolvers import reverse
 
-from markdown import Markdown
-
+from mdb_settings import DIFFER, FILENAME_PATTERN, MD, META
 
 DBMDB = Path(settings.BASE_DIR) / 'dbmdb'
-DIFFER = Differ()
-MD = Markdown(output_format='html5', extensions=[
-    'markdown.extensions.codehilite',
-    'markdown.extensions.meta',
-    'markdown.extensions.nl2br',
-    'markdown.extensions.sane_lists',
-    ])
-PARSE_META = {
-        'title': lambda x: x,
-        'date': lambda x: datetime.strptime(x, '%Y-%m-%d').date(),
-        'is_visible': lambda x: bool(int(x)),
-        'author': lambda x: x,
-        'template': lambda x: x,
-        }
-FILENAME_PATTERN = ['%s', '%s.md', '%s.markdown',
-        '*-*-*%s', '*-*-*%s.md', '*-*-*%s.markdown']
 
 
 class BlogEntry(Model):
@@ -79,7 +61,7 @@ class BlogEntry(Model):
             if not created:
                 stdout.writelines(DIFFER.compare(self.content, content))
             self.content = content
-        for key, converter in PARSE_META.items():
+        for key, converter in META.items():
             if key in MD.Meta:
                 old, new = self.__dict__[key], converter(MD.Meta[key][0])
                 if old != new:

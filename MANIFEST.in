@@ -3,4 +3,6 @@ include README.md
 recursive-include dmdb/management *
 recursive-include dmdb/migrations *
 recursive-include dmdb/templates *
+recursive-include smdb *
+recursive-include mdb_settings *
 recursive-include docs *
