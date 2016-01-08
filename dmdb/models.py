@@ -63,16 +63,16 @@ class BlogEntry(Model):
             if site_created:
                 site.name = domain
                 site.save()
-                stdout.write('New site: %s; please change its name' % site)
+                stdout.write('New site: %s; please change its name\n' % site)
             self.sites.add(site)
         if not created:
             for site in self.sites.all():
                 if site.domain not in domains:
                     self.sites.remove(site)
-                    stdout.write('Article %s not on %s anymore' % (self, site))
+                    stdout.write('Article %s not on %s anymore\n' % (self, site))
 
     def update_from_file(self, path, created=False, stdout=sys.stdout):
-        stdout.write('* %s' % path)
+        stdout.write('\n* %s\n' % path)
         with path.open('r') as f:
             content = MD.convert(f.read())
         if content != self.content:
@@ -84,7 +84,7 @@ class BlogEntry(Model):
                 old, new = self.__dict__[key], converter(MD.Meta[key][0])
                 if old != new:
                     if not created:
-                        stdout.write('Changed %s: %s → %s' % (key, old, new))
+                        stdout.write('Changed %s: %s → %s\n' % (key, old, new))
                     self.__dict__[key] = new
         domains = map(str.strip, MD.Meta['sites'][0].split(','))
         self.update_sites(domains, created, stdout)
@@ -101,6 +101,6 @@ class BlogEntry(Model):
         for e in BlogEntry.objects.all():
             if not any(list(dbmdb.glob(p % e.slug)) for p in FILENAME_PATTERN):
                 message = 'Deleted' if delete else 'Missing'
-                stdout.write('%s article: %s (%s)' % (message, e, e.slug))
+                stdout.write('%s article: %s (%s)\n' % (message, e, e.slug))
                 if delete:
                     e.delete()
