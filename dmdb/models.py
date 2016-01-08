@@ -91,7 +91,7 @@ class BlogEntry(Model):
         self.save()
 
     @staticmethod
-    def update_all(self, dbmdb=DBMDB, delete=False, stdout=sys.stdout):
+    def update_all(dbmdb=DBMDB, delete=False, stdout=sys.stdout):
         dbmdb = Path(dbmdb)
         for f in dbmdb.glob('*.md'):
             b, created = BlogEntry.objects.get_or_create(slug=f.stem)
