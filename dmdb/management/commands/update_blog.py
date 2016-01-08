@@ -1,8 +1,6 @@
-from pathlib import Path
-
 from django.core.management.base import BaseCommand
 
-from dmdb.models import BlogEntry, MD, DBMDB, PARSE_META, FILENAME_PATTERN
+from dmdb.models import BlogEntry, DBMDB
 
 
 class Command(BaseCommand):
@@ -16,27 +14,4 @@ class Command(BaseCommand):
                 help="Delete other entries")
 
     def handle(self, *args, **options):
-        dbmdb = Path(options['dbmdb'])
-        for f in dbmdb.glob('*.md'):
-            with f.open('r') as fo:
-                content = MD.convert(fo.read())
-            b, created = BlogEntry.objects.get_or_create(slug=f.stem)
-            if created:
-                b.content = content
-                for key, converter in PARSE_META.items():
-                    if key in MD.Meta:
-                        b.__dict__[key] = converter(MD.Meta[key][0])
-                if 'date' not in MD.Meta:
-                    try:
-                        b.date = PARSE_META['date'](f.stem[:10])
-                    except:
-                        pass
-                b.save()
-                self.stdout.write('New article: %s' % b.title)
-            else:
-                b.update_from_file(f, self.stdout)
-        for e in BlogEntry.objects.all():
-            if not any(list(dbmdb.glob(p % e.slug)) for p in FILENAME_PATTERN):
-                self.stdout.write('Deleted article: %s (%s)' % (e, e.slug))
-                if options['d']:
-                    e.delete()
+        BlogEntry.update_all(path=options['dbmdb'], delete=options['d'])
