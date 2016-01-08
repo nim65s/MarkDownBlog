@@ -1,19 +1,6 @@
 # MarkDownBlog
 
-## Quick start with Django
-
-1. Add "dmdb" to your `INSTALLED_APPS`
-
-2. Include the MarkDownBlog URLconf in your `urls.py`:
-
-    `url(r'^blog/', include('dmdb.urls')),`
-
-    or even
-
-    `url(r'', include('dmdb.urls')),`
-
-3. Run `python manage.py migrate` to create the models
-4. create the `dbmdb` folder, where each file is a post (whose slug is the filename):
+The DataBase for your MarkDown Blog is just un `dbmdb` folder, where each file is a post (whose slug is the filename):
 
 ```
 title: New Blog!
@@ -32,5 +19,12 @@ I can even write code in it !
         code.color()
 ```
 
-5. Run `python manage.py update_blog` to update your database
-6. Run `python runserver` and checkout http://127.0.0.1:8000
+## Quick start with smdb (Static)
+
+## Quick start with dmdb (Django)
+
+1. Add "dmdb" to your `INSTALLED_APPS`
+2. Include the MarkDownBlog URLconf in your `urls.py`: `url(r'^blog/', include('dmdb.urls')),`
+3. Run `./manage.py migrate` to create the models
+4. Run `./manage.py update_blog` to update your database from your `dbmdb` folder
+5. Run `./manage.py runserver` and checkout http://127.0.0.1:8000

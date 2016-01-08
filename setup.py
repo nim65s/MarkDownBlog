@@ -9,12 +9,20 @@ os.chdir(os.path.normpath(os.path.join(os.path.abspath(__file__), os.pardir)))
 
 setup(
         name='MarkDownBlog',
-        version='0.1.2',
-        packages=['dmdb'],
+        version='0.2.0',
+        packages=['dmdb', 'smdb'],
         install_requires=[
-            'Django',
-            'django-bootstrap3',
-            ],
+            'markdown',
+            ]
+        extras_require={
+            'dmdb': [
+                'Django',
+                'django-bootstrap3',
+                ],
+            'smdb': [
+                'jinja2'
+                ],
+            }
         include_package_data=True,
         license='GPL License',
         description='A simple Django app to blog with markdown.',
