@@ -14,4 +14,4 @@ class Command(BaseCommand):
                 help="Delete other entries")
 
     def handle(self, *args, **options):
-        BlogEntry.update_all(path=options['dbmdb'], delete=options['d'])
+        BlogEntry.update_all(dbmdb=options['dbmdb'], delete=options['d'])
