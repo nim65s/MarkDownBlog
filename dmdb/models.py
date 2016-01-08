@@ -57,7 +57,22 @@ class BlogEntry(Model):
     def get_short_url(self):
         return reverse('dmdb:short', kwargs={'pk': hex(self.pk)})
 
+    def update_sites(self, domains, created=False, stdout=sys.stdout):
+        for domain in domains:
+            site, site_created = Site.objects.get_or_create(domain=domain)
+            if site_created:
+                site.name = domain
+                site.save()
+                stdout.write('New site: %s; please change its name' % site)
+            self.sites.add(site)
+        if not created:
+            for site in self.sites.all():
+                if site.domain not in domains:
+                    self.sites.remove(site)
+                    stdout.write('Article %s not on %s anymore' % (self, site))
+
     def update_from_file(self, path, created=False, stdout=sys.stdout):
+        stdout.write('* %s' % path)
         with path.open('r') as f:
             content = MD.convert(f.read())
         if content != self.content:
@@ -71,14 +86,8 @@ class BlogEntry(Model):
                     if not created:
                         stdout.write('Changed %s: %s → %s' % (key, old, new))
                     self.__dict__[key] = new
-        for domain in map(str.strip, MD.Meta['sites'][0].split(',')):
-            site, created = Site.objects.get_or_create(domain=domain)
-            if created:
-                stdout.write('New site: %s' % domain)
-                site.name = domain
-            self.sites.add(site)
-        if created:
-            self.stdout.write('New article: %s' % b.title)
+        domains = map(str.strip, MD.Meta['sites'][0].split(','))
+        self.update_sites(domains, created, stdout)
         self.save()
 
     @staticmethod
@@ -86,6 +95,8 @@ class BlogEntry(Model):
         dbmdb = Path(dbmdb)
         for f in dbmdb.glob('*.md'):
             b, created = BlogEntry.objects.get_or_create(slug=f.stem)
+            if created:
+                stdout.write('New article: %s' % b.title)
             b.update_from_file(f, created, stdout)
         for e in BlogEntry.objects.all():
             if not any(list(dbmdb.glob(p % e.slug)) for p in FILENAME_PATTERN):
