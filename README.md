@@ -5,7 +5,6 @@ The DataBase for your MarkDown Blog is just un `dbmdb` folder, where each file i
 ```
 title: New Blog!
 date: 2015-12-24
-is_visible: 1
 author: myself
 sites: myself.com
 
