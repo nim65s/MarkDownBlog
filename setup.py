@@ -1,4 +1,5 @@
 import os
+
 from setuptools import setup
 
 with open(os.path.join(os.path.dirname(__file__), 'README.md')) as readme:
@@ -13,16 +14,16 @@ setup(
         packages=['dmdb', 'smdb'],
         install_requires=[
             'markdown',
-            ]
+            ],
         extras_require={
             'dmdb': [
                 'Django',
                 'django-bootstrap3',
                 ],
             'smdb': [
-                'jinja2'
+                'jinja2',
                 ],
-            }
+            },
         include_package_data=True,
         license='GPL License',
         description='A simple Django app to blog with markdown.',
