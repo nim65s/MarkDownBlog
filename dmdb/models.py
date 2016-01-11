@@ -69,6 +69,7 @@ class BlogEntry(Model):
                         stdout.write('Changed %s: %s → %s\n' % (key, old, new))
                     self.__dict__[key] = new
         domains = list(map(str.strip, MD.Meta['sites'][0].split(',')))
+        MD.reset()
         self.update_sites(domains, created, stdout)
         self.save()
 
