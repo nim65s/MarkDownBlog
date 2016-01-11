@@ -22,6 +22,7 @@ MD = Markdown(output_format='html5', extensions=[
     'markdown.extensions.sane_lists',
     'markdown.extensions.smart_strong',
     'markdown.extensions.tables',
+    'mdb_settings.niMarkdown',
     ])
 
 ident = lambda x: x
