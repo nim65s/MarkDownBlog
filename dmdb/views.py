@@ -1,14 +1,15 @@
 from datetime import date
 
 from django.http import Http404
-from django.views.generic import ListView, DetailView, RedirectView
 from django.shortcuts import get_object_or_404
+from django.views.generic import DetailView, ListView, RedirectView
 
 from .models import BlogEntry
 
 
 class BlogEntryMixin(object):
     queryset = BlogEntry.on_site.all()
+    permanent = True
 
 
 class BlogEntryListView(BlogEntryMixin, ListView):
@@ -20,8 +21,6 @@ class BlogEntryDetailView(BlogEntryMixin, DetailView):
 
 
 class BlogEntryShortURLRedirectView(BlogEntryMixin, RedirectView):
-    #permanent = True
-
     def get_redirect_url(self, *args, **kwargs):
         try:
             pk = int(self.kwargs['pk'], 16)
@@ -31,8 +30,6 @@ class BlogEntryShortURLRedirectView(BlogEntryMixin, RedirectView):
 
 
 class BlogEntryLongURLRedirectView(BlogEntryMixin, RedirectView):
-    #permanent = True
-
     def get_redirect_url(self, *args, **kwargs):
         billet = get_object_or_404(self.queryset, slug=self.kwargs['slug'])
         yea, mon, day = (int(self.kwargs[k]) for k in ['yea', 'mon', 'day'])
