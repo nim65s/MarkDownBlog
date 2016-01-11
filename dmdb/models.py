@@ -9,7 +9,7 @@ from django.contrib.sites.shortcuts import get_current_site
 from django.core.urlresolvers import reverse
 from django.db.models import (BooleanField, CharField, DateField, Manager, ManyToManyField, Model,
                               TextField)
-from mdb_settings import DIFFER, FILENAME_PATTERN, MD, META
+from mdb_settings import DIFFER, FILENAME_PATTERN, MD, META, readlines
 
 DBMDB = Path(settings.BASE_DIR) / 'dbmdb'
 
@@ -59,7 +59,7 @@ class BlogEntry(Model):
             content = MD.convert(f.read())
         if content != self.content:
             if not created:
-                stdout.writelines(DIFFER.compare(self.content, content))
+                stdout.writelines(DIFFER.compare(readlines(self.content), readlines(content)))
             self.content = content
         for key, converter in META.items():
             if key in MD.Meta:
