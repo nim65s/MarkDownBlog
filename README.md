@@ -23,7 +23,7 @@ I can even write code in it !
 ## Quick start with dmdb (Django)
 
 1. Add "dmdb" to your `INSTALLED_APPS`
-2. Include the MarkDownBlog URLconf in your `urls.py`: `url(r'^blog/', include('dmdb.urls')),`
+2. Include the Django MarkDownBlog URLconf in your `urls.py`: `url(r'^blog/', include('dmdb.urls')),`
 3. Run `./manage.py migrate` to create the models
 4. Run `./manage.py update_blog` to update your database from your `dbmdb` folder
 5. Run `./manage.py runserver` and checkout http://127.0.0.1:8000

@@ -16,10 +16,12 @@ DIFFER = Differ()
 FILENAME_PATTERN = ['%s', '%s.md', '%s.markdown']
 
 MD = Markdown(output_format='html5', extensions=[
-    'markdown.extensions.codehilite',
+    'markdown.extensions.fenced_code',
     'markdown.extensions.meta',
     'markdown.extensions.nl2br',
     'markdown.extensions.sane_lists',
+    'markdown.extensions.smart_strong',
+    'markdown.extensions.tables',
     ])
 
 ident = lambda x: x
