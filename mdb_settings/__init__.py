@@ -17,6 +17,7 @@ FILENAME_PATTERN = ['%s', '%s.md', '%s.markdown']
 
 MD = Markdown(output_format='html5', extensions=[
     'markdown.extensions.fenced_code',
+    'markdown.extensions.codehilite',
     'markdown.extensions.meta',
     'markdown.extensions.nl2br',
     'markdown.extensions.sane_lists',
@@ -34,6 +35,7 @@ META = {
         'author': ident,
         'template': ident,
         }
+
 
 def parser_args(parser, dbmdb=DBMDB):
     parser.add_argument('dbmdb', nargs='?', type=str, default=str(dbmdb),
