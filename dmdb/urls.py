@@ -1,6 +1,7 @@
 from django.conf.urls import url
 
-from .views import BlogEntryListView, BlogEntryDetailView, BlogEntryShortURLRedirectView, BlogEntryLongURLRedirectView
+from .views import (BlogEntryDetailView, BlogEntryListView, BlogEntryLongURLRedirectView,
+                    BlogEntryShortURLRedirectView)
 
 app_name = 'dmdb'
 urlpatterns = [
