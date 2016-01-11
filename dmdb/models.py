@@ -1,14 +1,14 @@
+import sys
 from datetime import date
 from pathlib import Path
-import sys
 
 from django.conf import settings
-from django.db.models import Model, DateField, CharField, BooleanField, TextField, ManyToManyField, Manager
 from django.contrib.sites.managers import CurrentSiteManager
 from django.contrib.sites.models import Site
 from django.contrib.sites.shortcuts import get_current_site
 from django.core.urlresolvers import reverse
-
+from django.db.models import (BooleanField, CharField, DateField, Manager, ManyToManyField, Model,
+                              TextField)
 from mdb_settings import DIFFER, FILENAME_PATTERN, MD, META
 
 DBMDB = Path(settings.BASE_DIR) / 'dbmdb'
@@ -68,9 +68,10 @@ class BlogEntry(Model):
                     if not created:
                         stdout.write('Changed %s: %s → %s\n' % (key, old, new))
                     self.__dict__[key] = new
-        domains = list(map(str.strip, MD.Meta['sites'][0].split(',')))
+        if 'sites' in MD.Meta:
+            domains = list(map(str.strip, MD.Meta['sites'][0].split(',')))
+            self.update_sites(domains, created, stdout)
         MD.reset()
-        self.update_sites(domains, created, stdout)
         self.save()
 
     @staticmethod
