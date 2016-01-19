@@ -22,8 +22,10 @@ setup(
                 ],
             'smdb': [
                 'jinja2',
+                'PyYAML',
                 ],
             },
+        scripts=['bin/smdb'],
         include_package_data=True,
         license='GPL License',
         description='A simple Django app to blog with markdown.',
