@@ -14,6 +14,7 @@ setup(
         packages=['dmdb', 'smdb', 'mdb_settings'],
         install_requires=[
             'markdown',
+            'Pygments',
             ],
         extras_require={
             'dmdb': [
