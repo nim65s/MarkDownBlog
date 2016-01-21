@@ -2,9 +2,8 @@ from pathlib import Path
 
 from django.core.management.base import BaseCommand
 
-from zinnia.models import Entry
-
 from dmdb.models import DBMDB
+from zinnia.models import Entry
 
 
 class Command(BaseCommand):

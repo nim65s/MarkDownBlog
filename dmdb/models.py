@@ -2,15 +2,14 @@ import sys
 from datetime import date
 from pathlib import Path
 
-from mdb_settings import DIFFER, FILENAME_PATTERN, MD, META, readlines
-
 from django.conf import settings
 from django.contrib.sites.managers import CurrentSiteManager
 from django.contrib.sites.models import Site
 from django.contrib.sites.shortcuts import get_current_site
 from django.core.urlresolvers import reverse
-from django.db.models import (BooleanField, CharField, DateField, Manager, ManyToManyField, Model,
-                              TextField)
+from django.db.models import BooleanField, CharField, DateField, Manager, ManyToManyField, Model, TextField
+
+from mdb_settings import DIFFER, FILENAME_PATTERN, MD, META, readlines
 
 DBMDB = Path(settings.BASE_DIR) / 'dbmdb'
 

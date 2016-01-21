@@ -9,7 +9,8 @@ Markdown extensions for Python:
 
 from markdown.extensions import Extension
 from markdown.inlinepatterns import Pattern, SimpleTagPattern
-from markdown.util import AtomicString, etree as ET
+from markdown.util import etree as ET
+from markdown.util import AtomicString
 
 
 class MathPattern(Pattern):

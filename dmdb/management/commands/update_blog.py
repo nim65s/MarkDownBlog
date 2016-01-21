@@ -1,6 +1,6 @@
 from django.core.management.base import BaseCommand
 
-from dmdb.models import BlogEntry, DBMDB
+from dmdb.models import DBMDB, BlogEntry
 from mdb_settings import parser_args
 
 
