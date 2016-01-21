@@ -1,9 +1,9 @@
 #!/usr/bin/env python3
 
 from argparse import ArgumentParser
+from os.path import dirname, expanduser
 from pathlib import Path
 from subprocess import call
-from os.path import dirname, expanduser
 
 import jinja2
 import yaml

@@ -1,8 +1,8 @@
 from datetime import datetime
 from difflib import Differ
-from markdown import Markdown
 from pathlib import Path
 
+from markdown import Markdown
 
 __all__ = ['DBMDB', 'DIFFER', 'FILENAME_PATTERN', 'MD', 'META', 'parser_args', 'readlines']
 
