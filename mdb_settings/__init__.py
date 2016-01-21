@@ -34,6 +34,7 @@ META = {
         'is_visible': lambda x: bool(int(x)),
         'author': ident,
         'template': ident,
+        'lang': ident,
         }
 
 

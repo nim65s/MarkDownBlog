@@ -52,4 +52,4 @@ def main():
                 with (path / path_in.stem).open('w') as f_out:
                     f_out.write(jinja_template.render(**context))
         if args.sync:
-            call(['rsync', '-avzP', str(dist) + '/', conf['ssh']])
+            call(['rsync', '-avzP', str(path) + '/', conf['ssh']])
