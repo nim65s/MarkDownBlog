@@ -24,6 +24,7 @@ parser.add_argument('destination', nargs='?', type=str, default=DEFAULT_DEST,
 parser.add_argument('template', nargs='?', type=str, default=DEFAULT_TEMP,
         help='Destination of the main template. (%s)' % DEFAULT_TEMP)
 
+
 def main():
     args = parser.parse_args()
     dbmdb, destination, config, template = [Path(args.__dict__[k]) for k in [

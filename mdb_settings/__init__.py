@@ -26,7 +26,9 @@ MD = Markdown(output_format='html5', extensions=[
     'mdb_settings.niMarkdown',
     ])
 
-ident = lambda x: x
+
+def ident(x):
+    return x
 
 META = {
         'title': ident,
