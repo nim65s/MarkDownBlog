@@ -11,8 +11,7 @@ class Command(BaseCommand):
 
     def add_arguments(self, parser):
         parser.add_argument('dbmdb', nargs='?', type=str, default=str(DBMDB),
-                help="""DataBase for MarkDownBlog: path to the folder of
-                articles in markdown. Default: %s""" % DBMDB)
+                            help="DataBase for MarkDownBlog: path to the folder of articles in markdown. (%s)" % DBMDB)
 
     def handle(self, *args, **options):
         dbmdb = Path(options['dbmdb'])

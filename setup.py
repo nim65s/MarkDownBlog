@@ -9,41 +9,41 @@ with open(os.path.join(os.path.dirname(__file__), 'README.md')) as readme:
 os.chdir(os.path.normpath(os.path.join(os.path.abspath(__file__), os.pardir)))
 
 setup(
-        name='MarkDownBlog',
-        version='1.0.0',
-        packages=['dmdb', 'smdb', 'mdb_settings'],
-        install_requires=[
-            'markdown',
-            'Pygments',
-            ],
-        extras_require={
-            'dmdb': [
-                'Django',
-                'django-bootstrap3',
-                ],
-            'smdb': [
-                'jinja2',
-                'PyYAML',
-                ],
-            },
-        scripts=['bin/smdb'],
-        include_package_data=True,
-        license='GPL License',
-        description='A simple Django app to blog with markdown.',
-        long_description=README,
-        url='https://saurel.me/',
-        author='Guilhem Saurel',
-        author_email='webmaster@saurel.me',
-        classifiers=[
-            'Environment :: Web Environment',
-            'Framework :: Django',
-            'Intended Audience :: Developers',
-            'License :: OSI Approved :: GPL License',
-            'Operating System :: OS Independent',
-            'Programming Language :: Python',
-            'Programming Language :: Python :: 3.4',
-            'Programming Language :: Python :: 3.5',
-            'Topic :: Internet :: WWW/HTTP',
-            'Topic :: Internet :: WWW/HTTP :: Dynamic Content',
-            ],
-        )
+    name='MarkDownBlog',
+    version='1.0.0',
+    packages=['dmdb', 'smdb', 'mdb_settings'],
+    install_requires=[
+        'markdown',
+        'Pygments',
+    ],
+    extras_require={
+        'dmdb': [
+            'Django',
+            'django-bootstrap3',
+        ],
+        'smdb': [
+            'jinja2',
+            'PyYAML',
+        ],
+    },
+    scripts=['bin/smdb'],
+    include_package_data=True,
+    license='GPL License',
+    description='A simple Django app to blog with markdown.',
+    long_description=README,
+    url='https://saurel.me/',
+    author='Guilhem Saurel',
+    author_email='webmaster@saurel.me',
+    classifiers=[
+        'Environment :: Web Environment',
+        'Framework :: Django',
+        'Intended Audience :: Developers',
+        'License :: OSI Approved :: GPL License',
+        'Operating System :: OS Independent',
+        'Programming Language :: Python',
+        'Programming Language :: Python :: 3.4',
+        'Programming Language :: Python :: 3.5',
+        'Topic :: Internet :: WWW/HTTP',
+        'Topic :: Internet :: WWW/HTTP :: Dynamic Content',
+    ],
+)

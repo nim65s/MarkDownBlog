@@ -24,26 +24,25 @@ MD = Markdown(output_format='html5', extensions=[
     'markdown.extensions.smart_strong',
     'markdown.extensions.tables',
     'mdb_settings.niMarkdown',
-    ])
+])
 
 
 def ident(x):
     return x
 
 META = {
-        'title': ident,
-        'date': lambda x: datetime.strptime(x, '%Y-%m-%d').date(),
-        'is_visible': lambda x: bool(int(x)),
-        'author': ident,
-        'template': ident,
-        'lang': ident,
-        }
+    'title': ident,
+    'date': lambda x: datetime.strptime(x, '%Y-%m-%d').date(),
+    'is_visible': lambda x: bool(int(x)),
+    'author': ident,
+    'template': ident,
+    'lang': ident,
+}
 
 
 def parser_args(parser, dbmdb=DBMDB):
     parser.add_argument('dbmdb', nargs='?', type=str, default=str(dbmdb),
-            help="""DataBase for MarkDownBlog: path to the folder of articles in markdown.
-            Default: %s""" % dbmdb)
+                        help="DataBase for MarkDownBlog: path to the folder of articles in markdown. (%s)" % dbmdb)
     parser.add_argument('-d', '--delete', action='store_true', help="Delete other entries")
 
 
