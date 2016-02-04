@@ -32,14 +32,17 @@ def main():
         jinja_template = jinja2.Template(template_file.read())
     with config.open('r') as config_file:
         yaml_config = yaml.load(config_file)
+    if args.delete and destination.is_dir():
+        for path in destination.iterdir():
+            for f in path.iterdir():
+                f.unlink()
+            path.rmdir()
+        destination.rmdir()
     for site, conf in yaml_config.items():
         path = destination / site
         if not path.is_dir():
             path.mkdir(parents=True)
-        if args.delete:
-            for f in path.iterdir():
-                if f.is_file():
-                    f.unlink()
+        path.chmod(0o755)
         for path_in in dbmdb.glob('*.md'):
             context = conf.copy()
             context['current'] = path_in.stem
@@ -51,5 +54,6 @@ def main():
             if 'sites' not in MD.Meta or site in MD.Meta['sites'][0]:
                 with (path / path_in.stem).open('w') as f_out:
                     f_out.write(jinja_template.render(**context))
+                (path / path_in.stem).chmod(0o644)
         if args.sync:
             call(['rsync', '-avzP', str(path) + '/', conf['ssh']])
