@@ -1,6 +1,7 @@
 <article>
   <header>
     <h1><a href="{{ object.get_absolute_url }}">{{ object.title }}</a></h1>
+    <p class="text-right"><time datetime="{{ object.date|date:'Y-m-d' }}">{{ object.date }}</time></p>
   </header>
   {{ object.content|safe }}
 </article>
