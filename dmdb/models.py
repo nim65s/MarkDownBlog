@@ -7,9 +7,13 @@ from django.contrib.sites.managers import CurrentSiteManager
 from django.contrib.sites.models import Site
 from django.contrib.sites.shortcuts import get_current_site
 from django.core.urlresolvers import reverse
-from django.db.models import BooleanField, CharField, DateField, Manager, ManyToManyField, Model, TextField
+from django.db.models import (BooleanField, CharField, DateField, DateTimeField,
+                              Manager, ManyToManyField, Model, TextField)
 
 from mdb_settings import DIFFER, FILENAME_PATTERN, MD, META, readlines
+
+DateTimeField
+
 
 DBMDB = Path(settings.BASE_DIR) / 'dbmdb'
 
@@ -24,6 +28,7 @@ class BlogEntry(Model):
     sites = ManyToManyField(Site, default=get_current_site)
     template = CharField(max_length=50, default='post')
     lang = CharField(max_length=2, default='en')
+    modification = DateTimeField(auto_now=True)
 
     objects = Manager()
     on_site = CurrentSiteManager()

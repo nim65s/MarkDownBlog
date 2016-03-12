@@ -22,3 +22,6 @@ class BlogEntriesFeed(Feed):
 
     def item_pubdate(self, item):
         return datetime(*item.date.timetuple()[:3])
+
+    def item_updateddate(self, item):
+        return item.modification
