@@ -1,7 +1,21 @@
-<article>
+<article{% if not alone %} class="list"{% endif %}>
   <header>
-    <h1><a href="{{ object.get_absolute_url }}">{{ object.title }}</a></h1>
-    <p class="text-right"><time datetime="{{ object.date|date:'Y-m-d' }}">{{ object.date }}</time></p>
+    <h{% if alone %}1{% else %}2{% endif %}>
+    {% if not alone %}<a href="{{ object.get_absolute_url }}">{% endif %}
+      {{ object.title }}
+      {% if not alone %}</a>{% endif %}
+    </h{% if alone %}1{% else %}2{% endif %}>
+    <p class="text-right">
+    {% if object.category %}
+    <a href="{% url 'dmdb:category' slug=object.category.slug %}">{{ object.category }}</a>,
+    {% endif %}
+    <time datetime="{{ object.date|date:'Y-m-d' }}">{{ object.date }}</time>
+    {% if object.tags.exists %}
+    <br>Tags: {{ object.tag_links|safe }}
+    {% endif %}
+    </p>
   </header>
-  {{ object.content|safe }}
+  <div class="content">
+    {{ object.content|safe }}
+  </div>
 </article>

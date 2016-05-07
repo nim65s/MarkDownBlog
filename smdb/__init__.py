@@ -7,7 +7,6 @@ from subprocess import call
 
 import jinja2
 import yaml
-
 from mdb_settings import MD, META, parser_args
 
 DEFAULT_DEST = '/tmp/smdb'

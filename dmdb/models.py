@@ -8,14 +8,46 @@ from django.contrib.sites.models import Site
 from django.contrib.sites.shortcuts import get_current_site
 from django.core.urlresolvers import reverse
 from django.db.models import (BooleanField, CharField, DateField, DateTimeField,
-                              Manager, ManyToManyField, Model, TextField)
+                              ForeignKey, Manager, ManyToManyField, Model, TextField)
 
 from mdb_settings import DIFFER, FILENAME_PATTERN, MD, META, readlines
+
+from autoslug import AutoSlugField
 
 DateTimeField
 
 
 DBMDB = Path(settings.BASE_DIR) / 'dbmdb'
+
+
+class BlogCategory(Model):
+    title = CharField(max_length=200, unique=True)
+    slug = AutoSlugField(populate_from='title', unique=True)
+
+    class Meta:
+        ordering = ['title']
+        verbose_name = 'Catégorie'
+
+    def __str__(self):
+        return self.title
+
+    def get_absolute_url(self):
+        return reverse('dmdb:category', kwargs={'slug': self.slug})
+
+
+class BlogTag(Model):
+    title = CharField(max_length=200, unique=True)
+    slug = AutoSlugField(populate_from='title', unique=True)
+
+    class Meta:
+        ordering = ['title']
+        verbose_name = 'Tag'
+
+    def __str__(self):
+        return self.title
+
+    def get_absolute_url(self):
+        return reverse('dmdb:tag', kwargs={'slug': self.slug})
 
 
 class BlogEntry(Model):
@@ -29,6 +61,8 @@ class BlogEntry(Model):
     template = CharField(max_length=50, default='post')
     lang = CharField(max_length=2, default='en')
     modification = DateTimeField(auto_now=True)
+    category = ForeignKey(BlogCategory, null=True)
+    tags = ManyToManyField(BlogTag)
 
     objects = Manager()
     on_site = CurrentSiteManager()
@@ -44,6 +78,9 @@ class BlogEntry(Model):
 
     def get_short_url(self):
         return reverse('dmdb:short', kwargs={'pk': hex(self.pk)})
+
+    def tag_links(self):
+        return ', '.join('<a href="%s">%s</a>' % (tag.get_absolute_url(), tag) for tag in self.tags.all())
 
     def update_sites(self, domains, created=False, stdout=sys.stdout):
         for domain in domains:
@@ -77,6 +114,12 @@ class BlogEntry(Model):
         if 'sites' in MD.Meta:
             domains = list(map(str.strip, MD.Meta['sites'][0].split(',')))
             self.update_sites(domains, created, stdout)
+        self.tags.all().delete()
+        if 'tags' in MD.Meta:
+            for tag in map(str.strip, MD.Meta['tags'][0].split(',')):
+                self.tags.add(BlogTag.objects.get_or_create(title=tag)[0])
+        if 'category' in MD.Meta:
+            self.category = BlogCategory.objects.get_or_create(title=MD.Meta['category'][0])[0]
         MD.reset()
         self.save()
 

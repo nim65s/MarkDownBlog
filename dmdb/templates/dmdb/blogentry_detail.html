@@ -1,5 +1,5 @@
 {% extends 'dmdb/base.html' %}
 
-{% block content %}
-{% include "dmdb/blogentry.html" %}
+{% block blog %}
+{% include "dmdb/blogentry.html" with alone=True %}
 {% endblock %}

@@ -1,5 +1,10 @@
-from django.contrib.admin import site
+from django.contrib.admin import ModelAdmin, site
 
-from .models import BlogEntry
+from .models import BlogCategory, BlogEntry
 
-site.register(BlogEntry)
+
+class BlogEntryAdmin(ModelAdmin):
+    list_display = ('title', 'category')
+
+site.register(BlogCategory)
+site.register(BlogEntry, BlogEntryAdmin)

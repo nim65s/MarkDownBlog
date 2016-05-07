@@ -10,7 +10,7 @@ os.chdir(os.path.normpath(os.path.join(os.path.abspath(__file__), os.pardir)))
 
 setup(
     name='MarkDownBlog',
-    version='1.1.0',
+    version='2.0.0a',
     packages=['dmdb', 'smdb', 'mdb_settings'],
     install_requires=[
         'markdown',
@@ -19,6 +19,7 @@ setup(
     extras_require={
         'dmdb': [
             'Django',
+            'django-autoslug',
             'django-bootstrap3',
         ],
         'smdb': [
