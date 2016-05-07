@@ -12,7 +12,7 @@ class BlogEntriesFeed(Feed):
     description = 'Latest blog entries'
 
     def items(self):
-        return BlogEntry.objects.all()[:10]
+        return BlogEntry.on_site.filter(is_visible=True)[:10]
 
     def item_description(self, item):
         return item.content
