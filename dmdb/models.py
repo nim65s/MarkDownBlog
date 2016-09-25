@@ -10,12 +10,8 @@ from django.core.urlresolvers import reverse
 from django.db.models import (BooleanField, CharField, DateField, DateTimeField,
                               ForeignKey, Manager, ManyToManyField, Model, TextField)
 
-from mdb_settings import DIFFER, FILENAME_PATTERN, MD, META, readlines
-
 from autoslug import AutoSlugField
-
-DateTimeField
-
+from mdb_settings import DIFFER, FILENAME_PATTERN, MD, META, readlines
 
 DBMDB = Path(settings.BASE_DIR) / 'dbmdb'
 
