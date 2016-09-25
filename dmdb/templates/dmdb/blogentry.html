@@ -10,6 +10,9 @@
     <a href="{% url 'dmdb:category' slug=object.category.slug %}">{{ object.category }}</a>,
     {% endif %}
     <time datetime="{{ object.date|date:'Y-m-d' }}">{{ object.date }}</time>
+    {% if object.modification %}
+    <time datetime="{{ object.modification|date:'Y-m-d' }}">(updated {{ object.modification }})</time>
+    {% endif %}
     {% if object.tags.exists %}
     <br>Tags: {{ object.tag_links|safe }}
     {% endif %}
