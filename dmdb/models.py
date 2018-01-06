@@ -6,11 +6,12 @@ from django.conf import settings
 from django.contrib.sites.managers import CurrentSiteManager
 from django.contrib.sites.models import Site
 from django.contrib.sites.shortcuts import get_current_site
-from django.core.urlresolvers import reverse
-from django.db.models import (BooleanField, CharField, DateField, DateTimeField,
+from django.db.models import (CASCADE, BooleanField, CharField, DateField, DateTimeField,
                               ForeignKey, Manager, ManyToManyField, Model, TextField)
+from django.urls import reverse
 
 from autoslug import AutoSlugField
+
 from mdb_settings import DIFFER, FILENAME_PATTERN, MD, META, readlines
 
 DBMDB = Path(settings.BASE_DIR) / 'dbmdb'
@@ -57,7 +58,7 @@ class BlogEntry(Model):
     template = CharField(max_length=50, default='post')
     lang = CharField(max_length=2, default='en')
     modification = DateTimeField(auto_now=True)
-    category = ForeignKey(BlogCategory, null=True)
+    category = ForeignKey(BlogCategory, null=True, on_delete=CASCADE)
     tags = ManyToManyField(BlogTag)
 
     objects = Manager()
