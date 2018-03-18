@@ -32,6 +32,7 @@ setup(
     license='GPL License',
     description='A simple Django app to blog with markdown.',
     long_description=README,
+    long_description_content_type="text/markdown",
     url='https://saurel.me/',
     author='Guilhem Saurel',
     author_email='webmaster@saurel.me',
